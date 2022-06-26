@@ -1,12 +1,10 @@
 use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Button};
-
-const APP_ID: &str = "org.gtk-rs.HelloWorld3";
+use gtk::{Application, ApplicationWindow, Button, Label};
 
 fn main() {
-    let app = Application::builder().application_id(APP_ID).build();    // Create a new application
-    app.connect_activate(build_ui);     // Connect to "activate" signal of `app`
-    app.run();      // Run the application
+    let app = Application::builder().build(); // Create a new application
+    app.connect_activate(build_ui); // Connect to "activate" signal of `app`
+    app.run(); // Run the application
 }
 
 fn build_ui(app: &Application) {
@@ -25,13 +23,18 @@ fn build_ui(app: &Application) {
         button.set_label("Hello World!");
     });
 
+    // let label = Label::new(Some("Hello world"));
     // Create a window
     let window = ApplicationWindow::builder()
         .application(app)
         .title("My GTK App") // Window title
-        .child(&button)
+        .child(&button) // Button inside the window
+        // .child(&label) // Text inside the window
         .build();
-
-    window.present();       // Present window
-    window.show_all();      // Will not work with no show_all
+    // window.add(&label);
+    // window.set_default_size(320, 140); // Sets windows's custom size
+    window.present(); // Present window. Sets windows's default size
+    window.show_all(); // Will not work with no show_all
 }
+
+// https://gtk-rs.org/gtk3-rs/stable/latest/docs/gtk/struct.Builder.html
